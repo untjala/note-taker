@@ -10,4 +10,4 @@ This application is built using Express.js. Notes are saved and retrieved via a 
   ## Resources 
  * [Live Site](https://untjala.github.io/note-taker/)
  * [Repository](https://github.com/untjala/note-taker)
- * [Heroku](https://fast-peak-15256.herokuapp.com/)
+ * [Heroku](https://peaceful-island-46884.herokuapp.com/)
