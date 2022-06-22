@@ -8,6 +8,6 @@ This application is built using Express.js. Notes are saved and retrieved via a 
  ![Creating a note](./assets/newNote.png)
  ![Saving a note](./assets/savedNote.png)
   ## Resources 
- * Live Site (https://untjala.github.io/note-taker/)
- * Repository (https://github.com/untjala/note-taker)
- * Heroku ()
+ * [Live Site](https://untjala.github.io/note-taker/)
+ * [Repository](https://github.com/untjala/note-taker)
+ * [Heroku](https://fast-peak-15256.herokuapp.com/)
