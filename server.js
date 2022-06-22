@@ -4,7 +4,7 @@ const path = require('path');
 const fs = require('fs');
 const db = require('./db/db.json');
 const { uuid } = require('./utils/utils');
-const { response } = require('express');
+
 //Sets the port--env for heroku, 3001 for fallback
 const PORT = process.env.PORT || 3001;
 
