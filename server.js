@@ -2,6 +2,7 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
+const {uuid} = require('./utils/utils')
 //Sets the port--env for heroku, 3001 for fallback
 const PORT = process.env.PORT || 3001;
 
@@ -31,6 +32,14 @@ app.get('/api/notes', (req, res) => {
     if (error) throw error;
     res.json(JSON.parse(data));
   });
+});
+app.post('/api/notes', (req, res) => {
+  fs.readFile(path.join(__dirname, './db/db.json'), 'utf-8', (error, data) => {
+    let db = JSON.parse(data);
+    db.push({
+      ...req.body,
+    });
+});
 });
 
 
