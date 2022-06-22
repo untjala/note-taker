@@ -2,7 +2,8 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
-const {uuid} = require('./utils/utils')
+const { uuid } = require('./utils/utils');
+const { response } = require('express');
 //Sets the port--env for heroku, 3001 for fallback
 const PORT = process.env.PORT || 3001;
 
@@ -21,10 +22,10 @@ app.get('/', (req, res) =>
   res.sendFile(path.join(__dirname, './public/index.html'))
 );
 //Will return notes.html
-app.get('/notes', (req, res) => 
+app.get('/notes', (req, res) =>
   res.sendFile(path.join(__dirname, './public/notes.html')
-));
-  
+  ));
+
 
 //Gets notes, reads from the database and parses through JSON
 app.get('/api/notes', (req, res) => {
@@ -33,20 +34,22 @@ app.get('/api/notes', (req, res) => {
     res.json(JSON.parse(data));
   });
 });
+//Post request to write new notes and save them to the database 
 app.post('/api/notes', (req, res) => {
   fs.readFile(path.join(__dirname, './db/db.json'), 'utf-8', (error, data) => {
     let db = JSON.parse(data);
     db.push({
+      id: uuid(),
       ...req.body,
     });
+    fs.writeFile(path.join(__dirname, './db/db.json'), JSON.stringify(db, null, 2),
+      (error, data) => {
+        if (error) throw error;
+        response.json(db);
+      }
+    );
 });
 });
-
-
-
-
-
-
 app.listen(PORT, () =>
   console.log(`App listening at http://localhost:${PORT}`)
 );
