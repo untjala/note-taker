@@ -1,6 +1,16 @@
 [
-    {
-        "title":"Test Title",
-        "text":"Test text"
-    }
+  {
+    "title": "Test Title",
+    "text": "Test text"
+  },
+  {
+    "id": "1663",
+    "title": "Test note",
+    "text": "Please work"
+  },
+  {
+    "title": "Grocery list",
+    "text": "Eggs, Milk",
+    "id": "256b"
+  }
 ]

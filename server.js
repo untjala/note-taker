@@ -2,6 +2,7 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
+const db = require('./db/db.json');
 const { uuid } = require('./utils/utils');
 const { response } = require('express');
 //Sets the port--env for heroku, 3001 for fallback
@@ -36,19 +37,20 @@ app.get('/api/notes', (req, res) => {
 });
 //Post request to write new notes and save them to the database 
 app.post('/api/notes', (req, res) => {
-  fs.readFile(path.join(__dirname, './db/db.json'), 'utf-8', (error, data) => {
-    let db = JSON.parse(data);
-    db.push({
-      id: uuid(),
-      ...req.body,
-    });
-    fs.writeFile(path.join(__dirname, './db/db.json'), JSON.stringify(db, null, 2),
-      (error, data) => {
-        if (error) throw error;
-        response.json(db);
+  const { title, text } = req.body;
+  if (title && text) {
+    const createdNote = {
+      title, text, id: uuid(),
+    };
+    db.push(createdNote);
+    let storedNotes = JSON.stringify((db), null, 2);
+    fs.writeFile(`./db/db.json`, storedNotes, () => {
+      const response = {
+        body: createdNote,
       }
-    );
-});
+      res.json(response);
+    })
+  };;
 });
 app.listen(PORT, () =>
   console.log(`App listening at http://localhost:${PORT}`)
