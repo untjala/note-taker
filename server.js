@@ -1,4 +1,4 @@
-//Pulling in required dependines 
+//Pulling in required dependencies 
 const express = require('express');
 const path = require('path');
 const fs = require('fs')
