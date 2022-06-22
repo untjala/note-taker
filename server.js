@@ -2,11 +2,10 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
-const { application } = require('express');
-//Sets the port--env for heroku, 3001 for fallback
-const PORT = process.env.PORT || 3001;
 //Sets up express.js as an app
 const app = express();
+//Sets the port--env for heroku, 3001 for fallback
+const PORT = process.env.PORT || 3001;
 
 //Middleware
 app.use(express.urlencoded({ extended: true }));
@@ -18,15 +17,15 @@ app.use(express.static('public'));
 //API routes
 //Will return index.html
 app.get('/', (req, res) =>
-    res.sendFile(path.join(__dirname, '/public/index.html'))
+  res.sendFile(path.join(__dirname, '/public/index.html'))
 )
 //Will return notes.html
-app.get('/notes', (req,res) => 
-    res.sendFile(path.join(__dirname),'/public/notes.html')
+app.get('/notes', (req, res) =>
+  res.sendFile(path.join(__dirname), '/public/notes.html')
 )
 //Gets notes, reads from the database and parses through JSON
-app.get('/api/notes', (req,res) => {
-  fs.readFile(path.join(__dirname,'./db/notes.json'), 'utf-8', (error,data) => {
+app.get('/api/notes', (req, res) => {
+  fs.readFile(path.join(__dirname, './db/db.json'), 'utf-8', (error, data) => {
     if (error) throw error;
     res.json(JSON.parse(data));
   });
